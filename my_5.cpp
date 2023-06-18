@@ -28,8 +28,8 @@ void add_() {
 }
 
 void display_() {
-    for(auto heading: headings)
-        cout << heading << "\t";
+    for(int i = 0; i < 5; i++)
+        cout << headings[i] << "\t";
     cout << "\n";
     for(int k = 0; k < count_; k++) {
         for(int i = 0; i < 5; i++) {
@@ -107,7 +107,7 @@ void exit_() {
 
     // storing records according to usn
     for(int k = 0; k < count_; k++) {
-        usn << students[k][0] << "|" << students[k][5];
+        usn << students[k][0] << "|" << ((int) students[k][5].c_str()[0]);
         usn << "\n";
     }
     usn.close();
@@ -116,7 +116,7 @@ void exit_() {
 int main() {
     int choice;
     for(int i = 0; i < 100; i++)
-        students[i][5] = to_string(i);
+        students[i][5] = i;
     while(true) {
         cout << "1. Add" << endl;
         cout << "2. Display" << endl;
