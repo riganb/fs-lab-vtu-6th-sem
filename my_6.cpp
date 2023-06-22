@@ -137,10 +137,8 @@ void exit_() {
     }
 
     // storing records according to usn
-    for(int k = 0; k < count_; k++) {
-        usn << students[k][0] << "|" << students[k][5];
-        usn << "\n";
-    }
+    for(int k = 0; k < count_; k++)
+        usn << students[k][0] << "|" << ((int) students[k][5].c_str()[0]) << "\n";
     usn.close();
 
     //sorting records according to name
@@ -153,10 +151,8 @@ void exit_() {
     }
 
     // storing records according to name
-    for(int k = 0; k < count_; k++) {
-        name << students[k][1] << "|" << students[k][0] << "|" << ((int) students[k][5].c_str()[0]);
-        name << "\n";
-    }
+    for(int k = 0; k < count_; k++)
+        name << students[k][1] << "|" << students[k][0] << "|" << ((int) students[k][5].c_str()[0]) << "\n";
     name.close();
 }
 
