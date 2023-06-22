@@ -25,6 +25,7 @@ void add_() {
         count_++;
         cout << "\n";
     }
+    save();
 }
 
 void display_() {
@@ -81,10 +82,11 @@ void delete_() {
                 students[k - 1][i] = students[k][i];
         count_--;
         cout << "Record deleted.\n";
+        save();
     }
 }
 
-void exit_() {
+void save() {
     ofstream record("record-5.txt"), usn("usn-5.txt");
 
     // storing records
@@ -132,7 +134,7 @@ int main() {
         else if(choice == 4)
             delete_();
         else if(choice == 5) {
-            exit_();
+            save();
             return 0;
         }
         cout << "\n";

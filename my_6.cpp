@@ -25,6 +25,7 @@ void add_() {
         count_++;
         cout << "\n";
     }
+    save();
 }
 
 void display_() {
@@ -108,14 +109,16 @@ void delete_() {
                         students[x - 1][i] = students[x][i];
                 cout << "Record deleted from index " << k << "!\n";
                 count_--;
+                save();
                 return;
             }
         }
         cout << "Wrong USN, not found!\n";
+        save();
     }
 }
 
-void exit_() {
+void save() {
     ofstream record("record-6.txt"), usn("usn-6.txt"), name("name-6.txt");
 
     // storing records
@@ -177,7 +180,7 @@ int main() {
         else if(choice == 4)
             delete_();
         else if(choice == 5) {
-            exit_();
+            save();
             return 0;
         }
         cout << "\n";
