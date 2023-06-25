@@ -13,6 +13,14 @@ string students[100][6];
 string headings[5] = {"USN", "Name", "Age", "Sem", "Branch"};
 int count_ = 0;
 
+void swap_records(int a, int b) {
+    for(int i = 0; i < 6; i++) {
+        string temp = students[a][i];
+        students[a][i] = students[b][i];
+        students[b][i] = temp;
+    }
+}
+
 void save() {
     ofstream record("record-5.txt"), usn("usn-5.txt");
 
@@ -85,14 +93,6 @@ void search_() {
         cout << "Student found at index " << idx << "!\n\n";
             for(int i = 0; i < 5; i++)
                 cout << headings[i] << ": " << students[idx][i] << "\n";
-    }
-}
-
-void swap_records(int a, int b) {
-    for(int i = 0; i < 6; i++) {
-        string temp = students[a][i];
-        students[a][i] = students[b][i];
-        students[b][i] = temp;
     }
 }
 

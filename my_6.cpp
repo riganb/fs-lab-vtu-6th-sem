@@ -13,6 +13,14 @@ string students[100][6];
 string headings[5] = {"USN", "Name", "Age", "Sem", "Branch"};
 int count_ = 0;
 
+void swap_records(int a, int b) {
+    for(int i = 0; i < 6; i++) {
+        string temp = students[a][i];
+        students[a][i] = students[b][i];
+        students[b][i] = temp;
+    }
+}
+
 void save() {
     ofstream record("record-6.txt"), usn("usn-6.txt"), name("name-6.txt");
 
@@ -111,14 +119,6 @@ void search_() {
             }
         }
         cout << "Wrong USN, not found!\n";
-    }
-}
-
-void swap_records(int a, int b) {
-    for(int i = 0; i < 6; i++) {
-        string temp = students[a][i];
-        students[a][i] = students[b][i];
-        students[b][i] = temp;
     }
 }
 
