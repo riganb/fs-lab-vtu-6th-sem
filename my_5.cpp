@@ -13,6 +13,33 @@ string students[100][6];
 string headings[5] = {"USN", "Name", "Age", "Sem", "Branch"};
 int count_ = 0;
 
+void save() {
+    ofstream record("record-5.txt"), usn("usn-5.txt");
+
+    // storing records
+    for(int k = 0; k < count_; k++) {
+        record << k;
+        for(int i = 0; i < 5; i++)
+            record << "|" << students[k][i];
+        record << "\n";
+    }
+    record.close();
+
+    //sorting records according to usn
+    for(int i = 0; i < count_; i++) {
+        for(int j = i + 1; j < count_; j++) {
+            if(students[i][0] > students[j][0]) {
+                swap_records(i, j);
+            }
+        }
+    }
+
+    // storing records according to usn
+    for(int k = 0; k < count_; k++)
+        usn << students[k][0] << "|" << ((int) students[k][5].c_str()[0]) << "\n";
+    usn.close();
+}
+
 void add_() {
     int n;
     cout << "Enter number of students: ";
@@ -84,33 +111,6 @@ void delete_() {
         cout << "Record deleted.\n";
         save();
     }
-}
-
-void save() {
-    ofstream record("record-5.txt"), usn("usn-5.txt");
-
-    // storing records
-    for(int k = 0; k < count_; k++) {
-        record << k;
-        for(int i = 0; i < 5; i++)
-            record << "|" << students[k][i];
-        record << "\n";
-    }
-    record.close();
-
-    //sorting records according to usn
-    for(int i = 0; i < count_; i++) {
-        for(int j = i + 1; j < count_; j++) {
-            if(students[i][0] > students[j][0]) {
-                swap_records(i, j);
-            }
-        }
-    }
-
-    // storing records according to usn
-    for(int k = 0; k < count_; k++)
-        usn << students[k][0] << "|" << ((int) students[k][5].c_str()[0]) << "\n";
-    usn.close();
 }
 
 int main() {
