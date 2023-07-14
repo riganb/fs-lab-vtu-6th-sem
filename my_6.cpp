@@ -184,6 +184,6 @@ int main() {
             return 0;
         }
         cout << "\n";
-    } 
+    }
     return 0;
 }
