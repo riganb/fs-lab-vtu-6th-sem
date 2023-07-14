@@ -11,10 +11,21 @@ using namespace std;
 
 string students[100][5];
 string headings[5] = {"USN", "Name", "Age", "Sem", "Branch"};
-int count = 0, fixedLength = 100;
+// you can change fixed record length to your choice
+int count = 0, fixedLength = 69;
 
 void saveRecords() {
     ofstream record("record-2.txt");
+    for(int i = 0; i < count; i++) {
+        string temp = "";
+        for(int j = 0; j < 5; j++) {
+            temp += students[i][j] + "|";
+        }
+        while(temp.length() < fixedLength)
+            temp += "|";
+        record << temp << "\n";
+    }
+    record.close();
 }
 
 void readRecords() {
@@ -28,10 +39,17 @@ void readRecords() {
         }
         getline(record, temp, '\n');
     }
+
+    record.close();
 }
 
 void writeRecord() {
     readRecords();
+    for(int i = 0; i < 5; i++) {
+        cout << "Enter " << headings[i] << ": ";
+        cin >> students[count][i];
+    }
+    count++;
     saveRecords();
 }
 
@@ -48,19 +66,44 @@ void displayRecords() {
 
 void modifyRecord() {
     readRecords();
-    saveRecords();
+    string usn;
+    cout << "Enter the USN to modify details for: ";
+    cin >> usn;
+    for(int i = 0; i < count; i++) {
+        if(students[i][0] == usn) {
+            cout << "Student found, enter new data:\n";
+            for(int j = 0; j < 5; j++) {
+                cout << headings[j] << ": ";
+                cin >> students[i][j];
+            }
+            saveRecords();
+            return;
+        }
+    }
+    cout << "Student not found!\n";
 }
 
 void searchRecord() {
     readRecords();
+    string usn;
+    cout << "Enter the USN to search for: ";
+    cin >> usn;
+    for(int i = 0; i < count; i++) {
+        if(students[i][0] == usn) {
+            cout << "Student found!\n";
+            for(int j = 0; j < 5; j++) {
+                cout << headings[j] << ": " << students[i][j] << endl;
+            }
+            return;
+        }
+    }
+    cout << "Student not found!\n";
 }
 
 int main() {
     saveRecords();
     int choice;
     while(true) {
-        // you can use "\n" in the place of endl
-        cout << endl;
         cout << "1. Write" << endl;
         cout << "2. Display" << endl;
         cout << "3. Modify" << endl;
