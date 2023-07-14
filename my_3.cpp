@@ -16,7 +16,7 @@ int count = 0;
 
 // this function is being used to save the records
 void pack() {
-    ofstream record("record-2.txt");
+    ofstream record("record-3.txt");
     for(int i = 0; i < count; i++) {
         string temp = "";
         for(int j = 0; j < 5; j++) {
@@ -29,7 +29,7 @@ void pack() {
 
 // this function is being used to read the records
 void unpack() {
-    ifstream record("record-2.txt");
+    ifstream record("record-3.txt");
     string temp;
 
     //reading records
