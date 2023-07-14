@@ -14,7 +14,8 @@ string headings[5] = {"USN", "Name", "Age", "Sem", "Branch"};
 // you can change fixed record length to your choice
 int count = 0, fixedLength = 69;
 
-void saveRecords() {
+// this function is being used to save the records
+void pack() {
     ofstream record("record-2.txt");
     for(int i = 0; i < count; i++) {
         string temp = "";
@@ -28,7 +29,8 @@ void saveRecords() {
     record.close();
 }
 
-void readRecords() {
+// this function is being used to read the records
+void unpack() {
     ifstream record("record-2.txt");
     string temp;
 
@@ -43,18 +45,20 @@ void readRecords() {
     record.close();
 }
 
-void writeRecord() {
-    readRecords();
+// this function is being used to add a record
+void write() {
+    unpack();
     for(int i = 0; i < 5; i++) {
         cout << "Enter " << headings[i] << ": ";
         cin >> students[count][i];
     }
     count++;
-    saveRecords();
+    pack();
 }
 
-void displayRecords() {
-    readRecords();
+// this function is being used to display all the records
+void display() {
+    unpack();
     cout << "USN\t" << "Name\t" << "Age\t" << "Sem\t" << "Branch\n";
     for(int i = 0; i < count; i++) {
         for(int j = 0; j < 5; j++) {
@@ -64,8 +68,9 @@ void displayRecords() {
     }
 }
 
-void modifyRecord() {
-    readRecords();
+// this function is being used to modify a record
+void modify() {
+    unpack();
     string usn;
     cout << "Enter the USN to modify details for: ";
     cin >> usn;
@@ -76,15 +81,16 @@ void modifyRecord() {
                 cout << headings[j] << ": ";
                 cin >> students[i][j];
             }
-            saveRecords();
+            pack();
             return;
         }
     }
     cout << "Student not found!\n";
 }
 
-void searchRecord() {
-    readRecords();
+// this function is being used to search a record
+void search() {
+    unpack();
     string usn;
     cout << "Enter the USN to search for: ";
     cin >> usn;
@@ -101,7 +107,7 @@ void searchRecord() {
 }
 
 int main() {
-    saveRecords();
+    pack();
     int choice;
     while(true) {
         cout << "1. Write" << endl;
@@ -112,13 +118,13 @@ int main() {
         cout << "Enter your choice: ";
         cin >> choice;
         if(choice == 1)
-            writeRecord();
+            write();
         else if(choice == 2)
-            displayRecords();
+            display();
         else if(choice == 3)
-            modifyRecord();
+            modify();
         else if(choice == 4)
-            searchRecord();
+            search();
         else if(choice == 5) {
             return 0;
         }
