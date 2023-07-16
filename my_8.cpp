@@ -58,9 +58,8 @@ int main() {
         file.close();
     }
     while(k != 1) {
-        for(int i = 0; i < k / 2; i++) {
+        for(int i = 0; i < k / 2; i++)
             merge(i * 2, i * 2 + 1, i);
-        }
         k = k / 2;
         inputSuffix = outputSuffix;
         outputSuffix = to_string(k) + inputSuffix;
