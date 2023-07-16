@@ -21,6 +21,29 @@ void swap_records(int a, int b) {
     }
 }
 
+void createEmptyFiles() {
+    ofstream record("record-6.txt"), usn("usn-6.txt"), name("name-6.txt");
+    record.close();
+    usn.close();
+    name.close();
+}
+
+void read() {
+    ifstream record("record-6.txt");
+    string temp;
+
+    //reading records
+    for(int i = 0; i < count_; i++) {
+        getline(record, students[i][5], '|');
+        for(int j = 0; j < 4; j++) {
+            getline(record, students[i][j], '|');
+        }
+        getline(record, students[i][4], '\n');
+    }
+
+    record.close();
+}
+
 void save() {
     ofstream record("record-6.txt"), usn("usn-6.txt"), name("name-6.txt");
 
@@ -63,6 +86,7 @@ void save() {
 }
 
 void add_() {
+    read();
     int n;
     cout << "Enter number of students: ";
     cin >> n;
@@ -78,6 +102,7 @@ void add_() {
 }
 
 void display_() {
+    read();
     for(int i = 0; i < 5; i++)
         cout << headings[i] << "\t";
     cout << "\n";
@@ -90,6 +115,7 @@ void display_() {
 }
 
 void search_() {
+    read();
     string term;
     cout << "Enter name to search for: ";
     cin >> term;
@@ -123,6 +149,7 @@ void search_() {
 }
 
 void delete_() {
+    read();
     string term;
     cout << "Enter name to delete for: ";
     cin >> term;
@@ -160,6 +187,7 @@ void delete_() {
 }
 
 int main() {
+    createEmptyFiles();
     int choice;
     for(int i = 0; i < 100; i++)
         students[i][5] = i;
