@@ -15,6 +15,7 @@ void merge(int in1, int in2, int out) {
     while(!inputFile1.eof() && !inputFile2.eof()) {
         if(read1) getline(inputFile1, content1, '|');
         if(read2) getline(inputFile2, content2, '|');
+        if(content1 == "" || content2 == "") break;
         if(content1 == content2) {
             outputFile << content1 << '|';
         } else if(content1 < content2) {
@@ -27,16 +28,20 @@ void merge(int in1, int in2, int out) {
             read2 = true;
         }
     }
-    if(inputFile1.eof())
-        while(!inputFile2.eof()) {
-            getline(inputFile2, content2, '|');
+    if(inputFile1.eof() && inputFile2.eof()) {
+    } else if(inputFile1.eof())
+        while(content2 != "") {
             outputFile << content2 << '|';
+            getline(inputFile2, content2, '|');
         }
     else if(inputFile2.eof())
-        while(!inputFile1.eof()) {
-            getline(inputFile1, content1, '|');
+        while(content1 != "") {
             outputFile << content1 << '|';
+            getline(inputFile1, content1, '|');
         }
+    inputFile1.close();
+    inputFile2.close();
+    outputFile.close();
 }
 
 int main() {
@@ -53,11 +58,18 @@ int main() {
         file.close();
     }
     while(k != 1) {
-        for(int i = 0; i < k / 2; i++)
+        for(int i = 0; i < k / 2; i++) {
             merge(i * 2, i * 2 + 1, i);
+        }
         k = k / 2;
         inputSuffix = outputSuffix;
         outputSuffix = to_string(k) + inputSuffix;
     }
+    cout << "Sorted records are stored in 024-inter.txt\n";
+    cout << "Sorted records are:\n";
+    ifstream file("024-inter.txt");
+    getline(file, tempContent);
+    cout << tempContent;
+    file.close();
     return 0;
 }
