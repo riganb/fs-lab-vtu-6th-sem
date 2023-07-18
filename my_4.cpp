@@ -8,16 +8,11 @@ string records[100][5];
 int count = 0;
 
 bool saveRecords(int n) {
-	fstream file("my4.txt", ios::out);
-	if(!file) {
-		cout << "File could not be opened for writing!\n";
-		return false;
-	}
+	ofstream file("my4.txt");
 	for(int k = 0; k < n + 1; k++) {
 		string line;
-		for(int i = 0; i < 5; i++) {
+		for(int i = 0; i < 5; i++)
 			line += records[k][i] + (i == 4? '!': '|');
-		}
 		file << line + '\n';
 	}
 	file.close();
@@ -38,6 +33,7 @@ void readRecords() {
 }
 
 void addRecord() {
+    readRecords();
 	for(int i = 0; i < 5; i++) {
 		cout << "Enter student's " << headings[i] << ": ";
 		cin >> records[count][i];
@@ -48,8 +44,8 @@ void addRecord() {
 void displayRecords() {
 	readRecords();
 	cout << "RRN" << '\t';
-	for(auto s: headings)
-		cout << s << '\t';
+	for(int i = 0; i < 5; i++)
+		cout << headings[i] << '\t';
 	cout << endl;
 	for(int i = 0; i < count; i++) {
 		cout << i << '\t';
