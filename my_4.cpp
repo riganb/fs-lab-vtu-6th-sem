@@ -20,7 +20,7 @@ bool saveRecords(int n) {
 }
 
 void readRecords() {
-	fstream file("my3.txt", ios::in);
+	fstream file("my4.txt", ios::in);
 	int temp = 0;
 	char tempRecord[5][25];
 	while(!file.eof()) {
@@ -49,8 +49,8 @@ void displayRecords() {
 	cout << endl;
 	for(int i = 0; i < count; i++) {
 		cout << i << '\t';
-		for(auto data: records[i])
-			cout << data << '\t';
+		for(int j = 0; j < 5; j++)
+			cout << records[i][j] << '\t';
 		cout << endl;
 	}
 }
@@ -69,6 +69,7 @@ void search() {
 }
 
 int main() {
+	saveRecords(-1);
 	int ch = 1;
 	while(ch) {
 		cout << endl << "\n0. Exit\n";

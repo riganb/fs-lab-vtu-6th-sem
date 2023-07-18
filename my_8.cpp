@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -62,7 +63,9 @@ int main() {
             merge(i * 2, i * 2 + 1, i);
         k = k / 2;
         inputSuffix = outputSuffix;
-        outputSuffix = to_string(k) + inputSuffix;
+        stringstream suffixStream;
+        suffixStream << k << inputSuffix;
+        outputSuffix = suffixStream.str();
     }
     cout << "Sorted records are stored in 024-inter.txt\n";
     cout << "Sorted records are:\n";
