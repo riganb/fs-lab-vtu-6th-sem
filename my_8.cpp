@@ -6,11 +6,18 @@ using namespace std;
 
 string inputSuffix = "-file.txt", outputSuffix = "-inter.txt";
 string tempContent;
+stringstream suffixStream;
 
 void merge(int in1, int in2, int out) {
-    ifstream inputFile1(to_string(in1) + inputSuffix);
-    ifstream inputFile2(to_string(in2) + inputSuffix);
-    ofstream outputFile(to_string(out) + outputSuffix);
+    suffixStream << in1 << inputSuffix;
+    ifstream inputFile1(suffixStream.str());
+    suffixStream.str("");
+    suffixStream << in2 << inputSuffix;
+    ifstream inputFile2(suffixStream.str());
+    suffixStream.str("");
+    suffixStream << out << outputSuffix;
+    ofstream outputFile(suffixStream.str());
+    suffixStream.str("");
     string content1, content2;
     bool read1 = true, read2 = true;
     while(!inputFile1.eof() && !inputFile2.eof()) {
@@ -66,6 +73,7 @@ int main() {
         stringstream suffixStream;
         suffixStream << k << inputSuffix;
         outputSuffix = suffixStream.str();
+        suffixStream.str("");
     }
     cout << "Sorted records are stored in 024-inter.txt\n";
     cout << "Sorted records are:\n";
